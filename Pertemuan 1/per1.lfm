@@ -1,0 +1,222 @@
+object Form1: TForm1
+  Left = 991
+  Height = 787
+  Top = 163
+  Width = 896
+  Caption = 'Tugas Pertemuan 1'
+  ClientHeight = 787
+  ClientWidth = 896
+  Color = 16744448
+  DesignTimePPI = 120
+  OnCreate = FormCreate
+  LCLVersion = '3.4.0.0'
+  object ButtonTampil: TButton
+    Left = 64
+    Height = 39
+    Top = 304
+    Width = 126
+    Caption = 'Tampilkan'
+    Color = clCream
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentFont = False
+    TabOrder = 0
+    OnClick = ButtonTampilClick
+  end
+  object NIM: TEdit
+    Left = 280
+    Height = 28
+    Top = 96
+    Width = 312
+    TabOrder = 1
+    OnChange = NIMChange
+  end
+  object LOGIN: TLabel
+    Left = 56
+    Height = 44
+    Top = 24
+    Width = 288
+    AutoSize = False
+    Caption = 'DATA MAHASISWA'
+    Color = clWhite
+    Font.CharSet = SHIFTJIS_CHARSET
+    Font.Color = clWindow
+    Font.Height = -33
+    ParentColor = False
+    ParentFont = False
+  end
+  object Keluar1: TButton
+    Left = 64
+    Height = 39
+    Top = 720
+    Width = 792
+    Color = clCream
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentFont = False
+    TabOrder = 2
+    OnClick = Keluar1Click
+  end
+  object Label1: TLabel
+    Left = 64
+    Height = 20
+    Top = 96
+    Width = 163
+    Caption = 'Nomor Induk Mahasiswa'
+    Font.Color = clWindow
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 64
+    Height = 20
+    Top = 136
+    Width = 116
+    Caption = 'Nama Mahasiswa'
+    Font.Color = clWindow
+    ParentFont = False
+  end
+  object Label3: TLabel
+    Left = 64
+    Height = 20
+    Top = 176
+    Width = 95
+    Caption = 'Program Studi'
+    Font.Color = clWindow
+    ParentFont = False
+  end
+  object Label4: TLabel
+    Left = 64
+    Height = 20
+    Top = 216
+    Width = 50
+    Caption = 'Jenjang'
+    Font.Color = clWindow
+    ParentFont = False
+  end
+  object NM: TEdit
+    Left = 280
+    Height = 28
+    Top = 136
+    Width = 312
+    TabOrder = 3
+    OnChange = NMChange
+  end
+  object PS: TEdit
+    Left = 280
+    Height = 28
+    Top = 176
+    Width = 312
+    TabOrder = 4
+    OnChange = PSChange
+  end
+  object J: TEdit
+    Left = 280
+    Height = 28
+    Top = 216
+    Width = 312
+    TabOrder = 5
+    OnChange = JChange
+  end
+  object ButtonHapus: TButton
+    Left = 264
+    Height = 39
+    Top = 304
+    Width = 126
+    Caption = 'Hapus'
+    Color = clCream
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentFont = False
+    TabOrder = 6
+    OnClick = ButtonHapusClick
+  end
+  object Keluar: TButton
+    Left = 472
+    Height = 39
+    Top = 304
+    Width = 126
+    Caption = 'Keluar'
+    Color = clCream
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentFont = False
+    TabOrder = 7
+    OnClick = KeluarClick
+  end
+  object Label5: TLabel
+    Left = 64
+    Height = 20
+    Top = 424
+    Width = 163
+    Caption = 'Nomor Induk Mahasiswa'
+    Font.Color = clWindow
+    ParentFont = False
+  end
+  object Label6: TLabel
+    Left = 64
+    Height = 20
+    Top = 464
+    Width = 116
+    Caption = 'Nama Mahasiswa'
+    Font.Color = clWindow
+    ParentFont = False
+  end
+  object Label7: TLabel
+    Left = 64
+    Height = 20
+    Top = 504
+    Width = 95
+    Caption = 'Program Studi'
+    Font.Color = clWindow
+    ParentFont = False
+  end
+  object Label8: TLabel
+    Left = 64
+    Height = 20
+    Top = 544
+    Width = 50
+    Caption = 'Jenjang'
+    Font.Color = clWindow
+    ParentFont = False
+  end
+  object TampilNIM: TEdit
+    Left = 280
+    Height = 28
+    Top = 424
+    Width = 304
+    TabOrder = 8
+    OnChange = TampilNIMChange
+  end
+  object TampilNM: TEdit
+    Left = 280
+    Height = 28
+    Top = 464
+    Width = 304
+    TabOrder = 9
+    OnChange = TampilNMChange
+  end
+  object TampilJ: TEdit
+    Left = 280
+    Height = 28
+    Top = 544
+    Width = 304
+    TabOrder = 10
+    OnChange = TampilJChange
+  end
+  object TampilPS: TEdit
+    Left = 280
+    Height = 28
+    Top = 504
+    Width = 304
+    TabOrder = 11
+    OnChange = TampilPSChange
+  end
+end
