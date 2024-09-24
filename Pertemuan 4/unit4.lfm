@@ -1,0 +1,63 @@
+object Form1: TForm1
+  Left = 1180
+  Height = 665
+  Top = 171
+  Width = 562
+  Caption = 'Form1'
+  ClientHeight = 665
+  ClientWidth = 562
+  DesignTimePPI = 120
+  OnCreate = FormCreate
+  OnMouseMove = FormMouseMove
+  LCLVersion = '3.4.0.0'
+  object ButtonLove: TButton
+    Left = 64
+    Height = 31
+    Top = 576
+    Width = 94
+    Caption = 'LOVE'
+    TabOrder = 0
+    OnClick = ButtonLoveClick
+  end
+  object ButtonEmoteSenyum: TButton
+    Left = 240
+    Height = 31
+    Top = 552
+    Width = 94
+    Caption = 'SENYUM'
+    TabOrder = 1
+    OnClick = ButtonEmoteSenyumClick
+  end
+  object ButtonEmoteMarah: TButton
+    Left = 408
+    Height = 31
+    Top = 576
+    Width = 94
+    Caption = 'SEDIH'
+    TabOrder = 2
+    OnClick = ButtonEmoteMarahClick
+  end
+  object Label1: TLabel
+    Left = 184
+    Height = 81
+    Top = 56
+    Width = 179
+    Caption = 'EMOJI'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -60
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ParentFont = False
+    OnClick = Label1Click
+  end
+  object Button1: TButton
+    Left = 240
+    Height = 31
+    Top = 608
+    Width = 94
+    Caption = 'Hapus'
+    TabOrder = 3
+    OnClick = Button1Click
+  end
+end
