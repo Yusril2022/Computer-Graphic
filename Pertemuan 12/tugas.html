@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Praktik</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <form action="" id="coordinateForm">
+                    <div class="mb-3">
+                        <label for="rectX" class="form-label">Koordinat X Persegi</label>
+                        <input type="number" class="form-control" id="rectX"  name="rectX"
+                        placeholder="Masukan X unutk Persegi" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="rectY" class="form-label">Koordinat Y Persegi</label>
+                        <input type="number" class="form-control" id="rectY"  name="rectY"
+                        placeholder="Masukan Y unutk Persegi" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="triX" class="form-label">Koordinat puncak X segitiga</label>
+                        <input type="number" class="form-control" id="triX" name="triX"
+                        placeholder="Masukan X untuk segitiga" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="triY" class="form-label">Koordinat puncak Y segitiga</label>
+                        <input type="number" class="form-control" id="triY" name="triY"
+                        placeholder="Masukan Y untuk segitiga" required>
+                    </div>
+                    <button type="button" class="btn btn-primary w-100" onclick="drawShapes()">Gambar</button>
+                </form>
+            </div>
+
+            <div class="col-md-6">
+                <canvas id="myCanvas" class="border rounded" width="400" height="400"></canvas>
+            </div>
+            
+        </div>
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script>
+    var canvas = document.getElementById('myCanvas');
+    var ctx = canvas.getContext('2d');
+
+    function drawShapes() {
+        var rectX = document.getElementById('rectX').value;
+        var rectY = document.getElementById('rectY').value;
+        var triX = document.getElementById('triY').value;
+        var triY = document.getElementById('triY').value;
+
+        ctx.clearRect(0,0, canvas.width, canvas.height);
+
+        ctx.fillStyle = 'blue';
+        ctx.fillRect(rectX, rectY, 100,100);
+
+        ctx.fillStyle = 'green';
+        ctx.beginPath();
+        ctx.moveTo(triX, triY);
+        ctx.lineTo(triX - 50, parseInt(triY) + 100);
+        ctx.lineTo(parseInt(triX) + 50, parseInt(triY) + 100);
+        ctx.closePath();
+        ctx.fill();
+    }
+</script>
+</html>
