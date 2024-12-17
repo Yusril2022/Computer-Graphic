@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kupu-Kupu Terbang</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Halaman Awal -->
+  <div id="welcomePage" class="welcome-page">
+    <div class="welcome-content">
+      <h1>Kupu-Kupu Terbang</h1>
+      <div class="icon">
+        <img src="https://www.pngarts.com/files/3/Butterfly-PNG-Image-with-Transparent-Background.png" alt="Butterfly" width="150px">
+      </div>
+      <h2>Anggota Kelompok:</h2>
+      <ul>
+        <li>Arista Aisyah Fitri</li>
+        <li>Athaya Shafa Nashwa</li>
+        <li>Bayu Sakti Bahar</li>
+        <li>Muhammad Hilman</li>
+        <li>Riziq Herviansyah Sabara</li>
+        <li>Umi Habibah</li>
+        <li>Yusril Mubaroq</li>
+      </ul>
+      <button id="startButton">Mulai</button>
+    </div>
+  </div>
+
+  <!-- Halaman Utama -->
+  <div class="container hidden">
+    <!-- Canvas -->
+    <canvas id="canvas"></canvas>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="header">
+        <h1>Kupu-Kupu Terbang</h1>
+        <div class="icon" style="margin-top: 20px;">
+          <img src="https://www.pngarts.com/files/3/Butterfly-PNG-Image-with-Transparent-Background.png" alt="" width="180px">
+        </div>
+      </div>
+      <div id="navigation">
+        <button id="addButterfly">Tambah Kupu-Kupu</button>
+        <button id="increaseSpeed">Tambah Kecepatan</button>
+        <button id="decreaseSpeed">Kurangi Kecepatan</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+<!-- Tambahan 
+ - Animasi sayap kupu kupu
+ - Bisa hinggap
+ - Ada 1 kupu kupu induk bisa di control
+-->
+

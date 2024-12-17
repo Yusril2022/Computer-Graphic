@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Animation - Aquarium</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+
+    <script>
+        // Initial Setup
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+
+// Variables
+let atoms = []; // Array to hold multiple atoms
+const gravity = 0.1; // Simulated gravity
+const lateralFlow = 0.05; // Simulated lateral flow (water effect)
+const waterResistance = 0.99; // Resistance to slow down movements
+const bounceFactor = 0.7; // Bounciness factor for collisions
+let isDragging = false;
+let dragAtom = null;
+
+// Utility Functions
+function randomDirection() {
+  return Math.random() * 2 - 1;
+}
+
+function randomColor(colors) {
+  return colors[Math.floor(Math.random() * colors.length)];
+}
+
+// Atom Constructor
+function Atom(x, y) {
+  this.x = x;
+  this.y = y;
+  this.radius = 10; // Radius of the nucleus
+  this.color = '#088eff';
+  this.particles = []; // Particles orbiting the nucleus
+  this.speedX = randomDirection() * 2; // Horizontal speed
+  this.speedY = randomDirection() * 2; // Vertical speed
+  this.colors = ['#00bdff', '#4d39ce', '#088eff'];
+
+  // Create orbiting particles
+  for (let i = 0; i < 3; i++) {
+    this.particles.push(
+      new Particle(
+        x,
+        y,
+        3,
+        randomColor(this.colors),
+        1,
+        0.3,
+        (Math.PI / 6) * (i + 1),
+        Math.random() * Math.PI * 2
+      )
+    );
+  }
+
+  // Update atom position and draw particles
+  this.update = function () {
+    if (!isDragging || dragAtom !== this) {
+      // Apply gravity
+      this.speedY += gravity;
+
+      // Apply lateral flow (simulate flowing towards lower regions)
+      this.speedX += lateralFlow * (canvas.width / 2 - this.x) / canvas.width;
+
+      // Move atom
+      this.x += this.speedX;
+      this.y += this.speedY;
+
+      // Simulate aquarium-like behavior near edges
+      if (this.x - this.radius <= 0 || this.x + this.radius >= canvas.width) {
+        this.speedX *= -bounceFactor; // Reverse direction horizontally with damping
+        this.x = Math.max(this.radius, Math.min(this.x, canvas.width - this.radius));
+      }
+      if (this.y + this.radius >= canvas.height) {
+        this.speedY *= -bounceFactor; // Reverse direction vertically with damping
+        this.y = canvas.height - this.radius; // Prevent sinking below the bottom
+      } else if (this.y - this.radius <= 0) {
+        this.speedY *= -bounceFactor; // Reverse direction vertically at the top
+        this.y = this.radius; // Prevent moving above the top
+      }
+
+      // Apply water resistance
+      this.speedX *= waterResistance;
+      this.speedY *= waterResistance;
+
+      // Check for collisions with other atoms
+      for (let i = 0; i < atoms.length; i++) {
+        const other = atoms[i];
+        if (other === this) continue;
+
+        const dx = this.x - other.x;
+        const dy = this.y - other.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const minDist = this.radius * 2 + other.particles[0].radius * 15;
+
+        if (distance < minDist) {
+          // Resolve collision
+          const angle = Math.atan2(dy, dx);
+          const overlap = minDist - distance;
+
+          this.x += Math.cos(angle) * overlap / 2;
+          this.y += Math.sin(angle) * overlap / 2;
+
+          other.x -= Math.cos(angle) * overlap / 2;
+          other.y -= Math.sin(angle) * overlap / 2;
+
+          // Swap velocities
+          const vxTotal = this.speedX - other.speedX;
+          const vyTotal = this.speedY - other.speedY;
+
+          this.speedX -= vxTotal;
+          this.speedY -= vyTotal;
+
+          other.speedX += vxTotal;
+          other.speedY += vyTotal;
+        }
+      }
+    }
+
+    // Draw nucleus
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+    const gradient = ctx.createRadialGradient(
+      this.x,
+      this.y,
+      0,
+      this.x,
+      this.y,
+      this.radius
+    );
+    gradient.addColorStop(0, 'black');
+    gradient.addColorStop(1, this.color);
+    ctx.fillStyle = gradient;
+    ctx.fill();
+    ctx.closePath();
+
+    // Update particles
+    this.particles.forEach((particle) => {
+      particle.currentCenter.x = this.x;
+      particle.currentCenter.y = this.y;
+      particle.update();
+    });
+  };
+}
+
+// Particle Constructor
+function Particle(x, y, radius, color, xOssze, yOssze, forgSzog, startRadian) {
+  this.x = x;
+  this.y = y;
+  this.radius = radius;
+  this.color = color;
+  this.radians = startRadian;
+  this.velocity = 0.1;
+  this.distanceFromCenter = 50;
+  this.currentCenter = { x: x, y: y };
+  this.xOssze = xOssze;
+  this.yOssze = yOssze;
+  this.forgSzog = forgSzog;
+
+  this.update = function () {
+    const lastPoint = { x: this.x, y: this.y };
+
+    this.radians += this.velocity;
+
+    const xkoo =
+      Math.cos(this.radians) * this.distanceFromCenter * this.xOssze;
+    const ykoo =
+      Math.sin(this.radians) * this.distanceFromCenter * this.yOssze;
+
+    const xkootr =
+      xkoo * Math.cos(this.forgSzog) - ykoo * Math.sin(this.forgSzog);
+    const ykootr =
+      xkoo * Math.sin(this.forgSzog) + ykoo * Math.cos(this.forgSzog);
+
+    this.x = this.currentCenter.x + xkootr;
+    this.y = this.currentCenter.y + ykootr;
+    this.draw(lastPoint);
+  };
+
+  this.draw = function (lastPoint) {
+    ctx.beginPath();
+    ctx.strokeStyle = this.color;
+    ctx.lineWidth = this.radius;
+    ctx.moveTo(lastPoint.x, lastPoint.y);
+    ctx.lineTo(this.x, this.y);
+    ctx.stroke();
+    ctx.closePath();
+  };
+}
+
+// Add a new atom at a specific position
+function addAtom(x, y) {
+  atoms.push(new Atom(x, y));
+}
+
+// Initial setup
+addAtom(canvas.width / 2, canvas.height / 2); // Add the first atom
+
+// Animation Loop
+function animate() {
+  requestAnimationFrame(animate);
+  ctx.fillStyle = 'black';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  atoms.forEach((atom) => atom.update());
+}
+
+animate();
+
+// Event Listener to add atoms on click
+canvas.addEventListener('click', (event) => {
+  const rect = canvas.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+  addAtom(x, y);
+});
+
+// Right-click and drag logic
+canvas.addEventListener('mousedown', (event) => {
+  if (event.button === 2) { // Right-click
+    const rect = canvas.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    dragAtom = atoms.find(
+      (atom) => Math.hypot(atom.x - x, atom.y - y) <= atom.radius
+    );
+
+    if (dragAtom) isDragging = true;
+  }
+});
+
+canvas.addEventListener('mousemove', (event) => {
+  if (isDragging && dragAtom) {
+    const rect = canvas.getBoundingClientRect();
+    dragAtom.x = event.clientX - rect.left;
+    dragAtom.y = event.clientY - rect.top;
+    dragAtom.speedX = 0; // Reset speed during drag
+    dragAtom.speedY = 0;
+  }
+});
+
+canvas.addEventListener('mouseup', (event) => {
+  if (event.button === 2) { // Right-click
+    isDragging = false;
+    dragAtom = null;
+  }
+});
+
+canvas.addEventListener('contextmenu', (event) => {
+  event.preventDefault(); // Disable context menu on right-click
+});
+    </script>
+</body>
+</html>

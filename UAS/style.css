@@ -1,0 +1,183 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  height: 100vh;
+  background: rgb(0, 0, 0);
+  background-size: cover;
+  flex-direction: column; /* Agar judul di atas dan konten di bawah */
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  flex-grow: 1; /* Membuat konten utama bisa berkembang sesuai ruang */
+}
+
+canvas {
+  width: 80%;
+  height: 100%;
+  display: block;
+}
+
+.sidebar {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: rgba(181, 165, 255, 0.247);
+  backdrop-filter: blur;
+  box-shadow: -5px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  padding: 20px;
+  text-align: center;
+  background: rgba(18, 1, 96, 0);
+  position: relative;
+  z-index: 10; /* Pastikan header selalu berada di atas konten */
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 20px;
+  color: #007bac;
+  border: 2px #130570;
+}
+
+#navigation {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#navigation button {
+  padding: 10px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background: #79d3f6;
+  box-shadow: -4px 0 5px rgba(0, 0, 0, 0.1);
+  color: #130570;
+  transition: background 0.3s ease;
+}
+
+#navigation button:hover {
+  background: #ffffff;
+  color: rgb(47, 0, 255);
+}
+
+/* Tambahan Kontrol Induk */
+#controls {
+  margin: 20px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: white;
+  text-align: center;
+  font-size: 14px;
+}
+
+#controls h3 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  color: #79d3f6;
+}
+
+/* Halaman Awal */
+.welcome-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #000000, #1a0374);
+  color: #fff;
+  text-align: center;
+  z-index: 1000;
+}
+
+.welcome-content {
+  max-width: 600px;
+}
+
+.welcome-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.welcome-content h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.welcome-content ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.welcome-content ul li {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+}
+
+.welcome-content button {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  color: #fff;
+  background: #130570;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.welcome-content button:hover {
+  background: #ffffff;
+  color: rgb(47, 0, 255);
+}
+
+/* Hidden Class */
+.hidden {
+  display: none;
+}
+
+/* Responsif untuk perangkat mobile */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .container {
+    flex-direction: column;
+  }
+
+  canvas {
+    width: 100%;
+    height: 50vh;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    box-shadow: none;
+    background: none;
+  }
+
+  #navigation {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  #navigation button {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+}
